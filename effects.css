@@ -58,3 +58,13 @@ html:not([data-ytn-color]) .ytn-float-btn svg{filter:none}
 
 #ytn-toast{position:fixed;left:50%;bottom:28px;z-index:9999;max-width:min(520px,90vw);padding:12px 18px;border-radius:12px;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#140b1e;color:#fff;border:1px solid var(--ytn-accent,#bd77ff);box-shadow:0 12px 32px #000a,0 0 16px color-mix(in srgb,var(--ytn-accent,#bd77ff) 45%,transparent);font:500 14px/1.4 Roboto,Arial,sans-serif;transition:opacity .2s,transform .2s}
 #ytn-toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* botão "Flutuar" sobre o próprio vídeo: aparece com o mouse em cima, some com os controles e nos anúncios */
+.ytn-float-overlay{position:absolute;top:14px;right:14px;z-index:60;display:flex!important;align-items:center;gap:6px;height:36px;padding:0 14px 0 10px;border-radius:999px;border:1px solid color-mix(in srgb,var(--ytn-accent,#bd77ff) 70%,transparent);background:color-mix(in srgb,#000 62%,var(--ytn-accent,#bd77ff));color:#fff;font:600 13px/1 Roboto,Arial,sans-serif;cursor:pointer;opacity:0;transform:translateY(-4px);transition:opacity .2s,transform .2s,box-shadow .2s;box-shadow:0 0 14px color-mix(in srgb,var(--ytn-accent,#bd77ff) 45%,transparent)}
+.ytn-float-overlay svg{width:20px;height:20px;fill:currentColor}
+.html5-video-player:hover .ytn-float-overlay,.html5-video-player.paused-mode .ytn-float-overlay,.ytn-float-overlay:focus-visible,.ytn-float-overlay.on{opacity:1;transform:none}
+.html5-video-player.ytp-autohide:not(.paused-mode) .ytn-float-overlay:not(:hover):not(.on){opacity:0}
+.ytn-float-overlay:hover{background:var(--ytn-accent,#bd77ff);color:#000;box-shadow:0 0 22px var(--ytn-accent,#bd77ff)}
+.html5-video-player.ad-showing .ytn-float-overlay,.ytp-fullscreen .ytn-float-overlay,html.ytn-no-float-btn .ytn-float-btn{display:none!important}
+html[data-ytn-color=bullet] .ytn-float-overlay{background:#1A1A1A;border-color:#333;box-shadow:0 12px 32px rgba(0,0,0,.55)}
+html[data-ytn-color=bullet] .ytn-float-overlay:hover{background:#F8F3E9;color:#070707}

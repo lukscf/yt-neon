@@ -1,4 +1,4 @@
-// YT Neon: ícone da barra na cor escolhida e atalho do player flutuante.
+// YT Neon: ícone na cor escolhida e atalho global do player flutuante.
 const COLORS = new Set(["purple", "blue", "pink", "cyan", "green", "bullet"]);
 
 function iconPaths(color) {
@@ -9,7 +9,7 @@ function iconPaths(color) {
 }
 
 async function applyIcon(color) {
-  if (color === undefined) ({ color } = await chrome.storage.local.get({ color: "purple" }));
+  if (color === undefined) ({ color } = await chrome.storage.sync.get({ color: "purple" }));
   try {
     await chrome.action.setIcon({ path: iconPaths(color) });
   } catch (error) {
@@ -20,11 +20,11 @@ async function applyIcon(color) {
 chrome.runtime.onInstalled.addListener(() => applyIcon());
 chrome.runtime.onStartup.addListener(() => applyIcon());
 chrome.storage.onChanged.addListener((changes, area) => {
-  if (area === "local" && changes.color) applyIcon(changes.color.newValue);
+  if (area === "sync" && changes.color) applyIcon(changes.color.newValue);
 });
 applyIcon();
 
-// Atalho (Alt+Shift+Y, dá para trocar em chrome://extensions/shortcuts).
+// Atalho global (Alt+Shift+Y, dá para trocar em chrome://extensions/shortcuts).
 // A janela flutuante só abre com um gesto do usuário. O Chrome repassa o gesto do atalho
 // para o script injetado aqui, que chama o float.js que já está na página.
 async function toggleFloat(tabId) {
@@ -40,9 +40,7 @@ async function toggleFloat(tabId) {
   }
 }
 
-chrome.commands.onCommand.addListener(async (command, tab) => {
+chrome.commands.onCommand.addListener((command, tab) => {
   if (command !== "toggle-float") return;
-  if (!tab) [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   if (tab?.id && tab.url?.startsWith("https://www.youtube.com/")) toggleFloat(tab.id);
 });
-

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YT Neon: opções</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body class="options">
+  <header><span class="spark">▶</span><div><strong>YT NEON</strong><small>OPÇÕES, ATALHOS E BACKUP</small></div></header>
+  <main>
+    <div id="settings"></div>
+
+    <section class="panel" aria-labelledby="h-keys">
+      <h2 id="h-keys">Atalhos no YouTube</h2>
+      <p class="hint">Clique em "Mudar" e aperte a nova combinação. Esc cancela e Backspace remove o atalho. Os atalhos não valem enquanto você digita na busca ou nos comentários.</p>
+      <div class="keys" id="keys"></div>
+      <p class="hint">Atalho global do player flutuante: <kbd id="global-key">Alt+Shift+Y</kbd>. Ele funciona mesmo com o foco fora da página e é trocado pelo navegador, em <a href="#" id="open-shortcuts">chrome://extensions/shortcuts</a>.</p>
+      <div class="row-btns"><button type="button" class="btn" id="reset-keys">Restaurar atalhos padrão</button></div>
+    </section>
+
+    <section class="panel" aria-labelledby="h-backup">
+      <h2 id="h-backup">Exportar e importar</h2>
+      <p class="hint">As configurações já acompanham sua conta do navegador quando a sincronização está ligada. O arquivo serve de backup ou para levar a outro perfil. Ele não inclui as posições salvas dos vídeos.</p>
+      <div class="row-btns">
+        <button type="button" class="btn" id="export">Exportar (.json)</button>
+        <button type="button" class="btn" id="import">Importar…</button>
+        <input type="file" id="file" accept="application/json,.json" hidden>
+        <button type="button" class="btn" id="reset-all">Restaurar tudo ao padrão</button>
+        <button type="button" class="btn" id="clear-local">Apagar posições salvas e velocidades por canal</button>
+      </div>
+    </section>
+
+    <p id="status" role="status" aria-live="polite"></p>
+  </main>
+  <script src="settings.js"></script>
+  <script src="form.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>

@@ -5,6 +5,10 @@
 (() => {
   if (window.__ytnFloat) return;
 
+  // "doc": janela com controles neon e esticar (o navegador mostra uma barra com o endereço do site).
+  // "native": Picture-in-Picture padrão, só o vídeo, sem barra; controles do próprio navegador.
+  let mode = "doc";
+  let fillPref = false;
   const st = { win: null, video: null, home: null, next: null, holder: null, cleanup: [] };
   const isWatchVideo = (v) => v && v.isConnected && (v.readyState > 0 || v.currentSrc);
 
@@ -149,12 +153,12 @@
       fitBtn.title = on ? "Voltar ao normal, com as faixas pretas (E)" : "Esticar para preencher a janela (E)";
       fitBtn.setAttribute("aria-label", on ? "Voltar ao tamanho normal" : "Esticar o vídeo para preencher a janela");
       fitBtn.setAttribute("aria-pressed", String(on));
-      if (save) try { chrome.storage.local.set({ floatFill: on }); } catch {}
+      if (save) try { chrome.storage.sync.set({ floatFill: on }); } catch {}
     };
     const toggleFill = () => setFill(!d.body.classList.contains("fill"), true);
     fitBtn.addEventListener("click", toggleFill);
     setFill(false, false);
-    try { chrome.storage.local.get({ floatFill: false }).then((r) => setFill(!!r.floatFill, false)); } catch {}
+    setFill(!!fillPref, false);
 
     $(".back").addEventListener("click", () => { close(); try { window.focus(); } catch {} });
 
@@ -240,7 +244,7 @@
     if (!video) { toast("YT Neon: abra um vídeo para usar o player flutuante."); return Promise.resolve("sem-video"); }
     const native = () => video.requestPictureInPicture().then(() => "nativo");
     let attempt;
-    if ("documentPictureInPicture" in window) {
+    if (mode !== "native" && "documentPictureInPicture" in window) {
       attempt = openDocPip(video).then(() => "documento", (error) => {
         console.warn("YT Neon: Document PiP falhou, usando o PiP padrão", error);
         restore();
@@ -273,12 +277,29 @@
     const on = !!(st.win || document.pictureInPictureElement);
     for (const b of document.querySelectorAll(".ytn-float-btn")) {
       b.classList.toggle("on", on);
+      if (b.classList.contains("ytn-float-overlay")) { b.querySelector("span").textContent = on ? "Voltar" : "Flutuar"; }
       b.title = on ? "Fechar o player flutuante (Alt+Shift+Y)" : "Player flutuante, sempre por cima (Alt+Shift+Y)";
       b.setAttribute("aria-label", b.title);
     }
   }
 
+  // Botão "Flutuar" sobre o próprio vídeo (canto superior direito, aparece com o mouse em cima).
+  // Fica escondido durante anúncios.
+  function ensureOverlay() {
+    for (const player of document.querySelectorAll("#movie_player.html5-video-player")) {
+      if (player.querySelector(":scope > .ytn-float-overlay")) continue;
+      const b = document.createElement("button");
+      b.className = "ytn-float-overlay ytn-float-btn";
+      b.type = "button";
+      b.innerHTML = svg("float") + "<span>Flutuar</span>";
+      b.addEventListener("click", (e) => { e.stopPropagation(); toggle("video"); });
+      for (const ev of ["mousedown", "dblclick"]) b.addEventListener(ev, (e) => e.stopPropagation());
+      player.appendChild(b);
+    }
+  }
+
   function ensureButton() {
+    ensureOverlay();
     for (const bar of document.querySelectorAll(".html5-video-player .ytp-right-controls")) {
       if (bar.querySelector(".ytn-float-btn")) continue;
       const b = document.createElement("button");
@@ -296,6 +317,9 @@
 
   window.__ytnFloat = {
     toggle, open, close, ensureButton,
+    setMode(m) { mode = m === "native" ? "native" : "doc"; },
+    setFill(on) { fillPref = !!on; },
+    video() { return st.video; },
     get state() { return { open: !!st.win, native: !!document.pictureInPictureElement }; }
   };
 })();

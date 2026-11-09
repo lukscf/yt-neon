@@ -2,10 +2,7 @@
   if (window.__ytNeonLoaded) return;
   window.__ytNeonLoaded = true;
 
-  const DEFAULTS = {
-    theme: true, tilt: true, floatButton: true,
-    color: "purple", background: "bullet", font: "youtube"
-  };
+  const DEFAULTS = globalThis.YTN.DEFAULTS; // settings.js
   const COLORS = new Set(["purple", "blue", "pink", "cyan", "green", "bullet"]);
   const BACKGROUNDS = new Set(["aurora", "stars", "matrix", "synthwave", "bokeh", "warp", "rain", "fireflies", "orbit", "bullet", "none"]);
   const FONTS = new Set(["youtube", "mono", "opensans", "arial"]);
@@ -56,12 +53,12 @@
     else document.querySelectorAll(".ytn-float-btn").forEach((b) => b.remove());
   }
 
-  chrome.storage.local.get(DEFAULTS).then((stored) => {
+  globalThis.YTN.load().then((stored) => {
     Object.assign(settings, stored);
     applySettings();
   });
   chrome.storage.onChanged.addListener((changes, area) => {
-    if (area !== "local") return;
+    if (area !== "sync") return;
     for (const key of Object.keys(DEFAULTS)) {
       if (changes[key]) settings[key] = changes[key].newValue ?? DEFAULTS[key];
     }

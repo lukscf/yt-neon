@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "YT Neon para YouTube",
   "version": "1.0.0",
-  "description": "Tema neon, fundos animados e hover 3D no YouTube, com player de vídeo flutuante sempre por cima das outras janelas.",
+  "description": "Tema neon e player flutuante para o YouTube, com velocidade até 4x, volume até 400%, loop A-B, captura de frame, modo foco e mais.",
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
@@ -26,6 +26,10 @@
     },
     "default_popup": "popup.html"
   },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
   "background": {
     "service_worker": "background.js"
   },
@@ -43,14 +47,27 @@
         "https://www.youtube.com/*"
       ],
       "js": [
+        "main.js"
+      ],
+      "world": "MAIN",
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "settings.js",
         "bullet-fx.js",
         "float.js",
+        "player.js",
         "content.js"
       ],
       "css": [
         "theme.css",
         "effects.css",
-        "fonts.css"
+        "fonts.css",
+        "ui.css"
       ],
       "run_at": "document_idle"
     }

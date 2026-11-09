@@ -1,0 +1,60 @@
+/* YT Neon: recursos de interface. Cada bloco só vale com a classe ligada no <html>.
+   Nenhuma regra toca em anúncios. */
+
+/* ---------- Esconder Shorts ---------- */
+html.ytn-hide-shorts :is(
+  ytd-reel-shelf-renderer,
+  ytd-rich-shelf-renderer[is-shorts],
+  ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]),
+  grid-shelf-view-model:has(a[href^="/shorts/"]),
+  ytd-rich-item-renderer:has(a[href^="/shorts/"]),
+  ytd-video-renderer:has(a[href^="/shorts/"]),
+  ytd-compact-video-renderer:has(a[href^="/shorts/"]),
+  yt-lockup-view-model:has(a[href^="/shorts/"]),
+  ytd-reel-item-renderer,
+  ytm-shorts-lockup-view-model,
+  ytm-shorts-lockup-view-model-v2,
+  ytd-guide-entry-renderer:has(a[title="Shorts"]),
+  ytd-mini-guide-entry-renderer[aria-label="Shorts"]
+){display:none!important}
+
+/* ---------- Comentários, lateral, cards e telas finais ---------- */
+html.ytn-hide-comments ytd-watch-flexy #comments{display:none!important}
+html.ytn-hide-related ytd-watch-flexy #secondary #related,html.ytn-hide-related ytd-watch-flexy ytd-watch-next-secondary-results-renderer{display:none!important}
+html.ytn-hide-related ytd-watch-flexy:not([theater]) #secondary:not(:has(ytd-playlist-panel-renderer:not([hidden]))){display:none!important}
+html.ytn-hide-cards #movie_player :is(.ytp-cards-teaser,.ytp-cards-button,.iv-branding,.annotation,.ytp-paid-content-overlay-link){display:none!important}
+html.ytn-hide-endscreens #movie_player :is(.ytp-ce-element,.ytp-endscreen-content,.html5-endscreen,.videowall-endscreen,.ytp-autonav-endscreen-upnext-container){display:none!important}
+
+/* ---------- Grade da página inicial: número de colunas ---------- */
+html[data-ytn-cols] ytd-browse ytd-rich-grid-renderer{--ytd-rich-grid-items-per-row:var(--ytn-cols)!important;--ytd-rich-grid-posts-per-row:var(--ytn-cols)!important}
+html[data-ytn-cols] ytd-browse ytd-rich-grid-renderer>#contents{display:grid!important;grid-template-columns:repeat(var(--ytn-cols),minmax(0,1fr));column-gap:16px;padding:0 24px!important;max-width:none!important}
+html[data-ytn-cols] ytd-browse ytd-rich-grid-renderer>#contents :is(ytd-rich-grid-row,ytd-rich-grid-row>#contents){display:contents!important}
+html[data-ytn-cols] ytd-browse ytd-rich-grid-renderer>#contents ytd-rich-item-renderer{width:auto!important;max-width:none!important;margin:0 0 32px!important}
+html[data-ytn-cols] ytd-browse ytd-rich-grid-renderer>#contents>:is(ytd-rich-section-renderer,ytd-continuation-item-renderer,#header,.ytd-rich-grid-renderer[is-header]){grid-column:1/-1}
+
+/* ---------- Modo foco: só o player na página do vídeo ---------- */
+html.ytn-focus:has(ytd-watch-flexy:not([hidden])) #masthead-container,
+html.ytn-focus ytd-watch-flexy:not([hidden]) :is(#secondary,#below),
+html.ytn-focus:has(ytd-watch-flexy:not([hidden])) :is(tp-yt-app-drawer#guide,ytd-mini-guide-renderer){display:none!important}
+html.ytn-focus:has(ytd-watch-flexy:not([hidden])) ytd-page-manager{margin-top:0!important;margin-left:0!important}
+html.ytn-focus:has(ytd-watch-flexy:not([hidden])) ytd-app{--ytd-masthead-height:0px!important}
+html.ytn-focus ytd-watch-flexy:not([hidden]) #columns{max-width:none!important;padding:0!important;margin:0!important}
+html.ytn-focus ytd-watch-flexy:not([hidden]) #primary{max-width:none!important;padding:0!important;margin:0!important}
+html.ytn-focus ytd-watch-flexy:not([hidden]) #player-container-outer{max-width:calc(100vh * 16 / 9)!important;margin:0 auto!important}
+html.ytn-focus:has(ytd-watch-flexy:not([hidden])) body{overflow:hidden!important}
+#ytn-focus-exit{display:none}
+html.ytn-focus:has(ytd-watch-flexy:not([hidden])) #ytn-focus-exit{display:block;position:fixed;top:12px;right:16px;z-index:3000;padding:8px 14px;border-radius:999px;border:1px solid color-mix(in srgb,var(--ytn-accent,#bd77ff) 60%,transparent);background:#000b;color:#fff;font:600 12px Roboto,Arial,sans-serif;cursor:pointer;opacity:.25;transition:opacity .2s}
+#ytn-focus-exit:hover,#ytn-focus-exit:focus-visible{opacity:1;box-shadow:0 0 14px var(--ytn-accent,#bd77ff)}
+
+/* ---------- Aviso na tela (velocidade, volume, loop) ---------- */
+#ytn-osd{position:absolute;top:18px;left:50%;z-index:70;display:flex;align-items:center;gap:12px;padding:9px 16px;border-radius:999px;transform:translate(-50%,-6px);opacity:0;pointer-events:none;background:color-mix(in srgb,#000 78%,var(--ytn-accent,#bd77ff));border:1px solid color-mix(in srgb,var(--ytn-accent,#bd77ff) 60%,transparent);color:#fff;font:600 14px/1.2 Roboto,Arial,sans-serif;box-shadow:0 0 18px color-mix(in srgb,var(--ytn-accent,#bd77ff) 40%,transparent);transition:opacity .18s,transform .18s;white-space:nowrap}
+#ytn-osd.in-page{position:fixed;top:72px}
+#ytn-osd.show{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#ytn-osd button{padding:4px 12px;border-radius:999px;border:0;background:var(--ytn-accent,#bd77ff);color:#000;font:700 12px Roboto,Arial,sans-serif;cursor:pointer}
+html[data-ytn-color=bullet] #ytn-osd{background:#1A1A1A;border-color:#333;box-shadow:0 12px 32px rgba(0,0,0,.55)}
+html[data-ytn-color=bullet] #ytn-osd button{background:#F8F3E9;color:#070707}
+
+/* ---------- Marca do loop A-B na barra de progresso ---------- */
+.ytn-marks{position:absolute;inset:0;pointer-events:none;z-index:40}
+.ytn-marks i{position:absolute;top:0;bottom:0;opacity:.9}
+.ytn-marks i.ab{background:color-mix(in srgb,var(--ytn-accent,#bd77ff) 55%,transparent);border-left:2px solid #fff;border-right:2px solid #fff;min-width:2px}
