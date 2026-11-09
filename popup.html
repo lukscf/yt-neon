@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YT Neon</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header><span class="spark">▶</span><div><strong>YT NEON</strong><small>APARÊNCIA DO YOUTUBE</small></div></header>
+  <main>
+    <button type="button" id="float" class="float-btn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 7h-8v6h8zm2-4H3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h18a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H3V5h18z"/></svg>Player flutuante (sempre por cima)</button>
+    <p class="hint">Atalho: <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>Y</kbd>. Dá para trocar em chrome://extensions/shortcuts.</p>
+
+    <label class="switch-row"><span>Tema neon</span><input id="theme" type="checkbox" checked></label>
+    <label class="switch-row"><span>Hover 3D com o mouse</span><input id="tilt" type="checkbox" checked></label>
+    <label class="switch-row"><span>Botão flutuante no player</span><input id="floatButton" type="checkbox" checked></label>
+
+    <h2>Cor do tema</h2>
+    <div class="colors" role="group" aria-label="Cor do tema">
+      <button type="button" data-color="purple" title="Roxo" aria-label="Roxo" style="--dot:#bd77ff"></button>
+      <button type="button" data-color="blue" title="Azul" aria-label="Azul" style="--dot:#5c9dff"></button>
+      <button type="button" data-color="pink" title="Rosa" aria-label="Rosa" style="--dot:#ff74bb"></button>
+      <button type="button" data-color="cyan" title="Ciano" aria-label="Ciano" style="--dot:#4fe0db"></button>
+      <button type="button" data-color="green" title="Verde" aria-label="Verde" style="--dot:#75df95"></button>
+      <button type="button" data-color="bullet" class="bullet" title="Bullet" aria-label="Bullet" style="--dot:#C2F141"></button>
+    </div>
+
+    <label class="field" for="background">Fundo animado</label>
+    <select id="background">
+      <option value="bullet">Bullet: balas e cripto</option>
+      <option value="aurora">Aurora suave</option>
+      <option value="stars">Estrelas cintilantes</option>
+      <option value="matrix">Chuva Matrix</option>
+      <option value="synthwave">Grade synthwave</option>
+      <option value="bokeh">Bolhas de luz</option>
+      <option value="warp">Hiperespaço</option>
+      <option value="rain">Chuva neon</option>
+      <option value="fireflies">Vaga-lumes</option>
+      <option value="orbit">Órbitas de luz</option>
+      <option value="none">Nenhum</option>
+    </select>
+
+    <label class="field" for="font">Fonte</label>
+    <select id="font">
+      <option value="youtube">Do tema (YouTube; Open Sans no tema Bullet)</option>
+      <option value="mono">Mono robot (Roboto Mono)</option>
+      <option value="opensans">Open Sans</option>
+      <option value="arial">Arial</option>
+    </select>
+
+    <p id="status" role="status" aria-live="polite"></p>
+    <p id="diag" class="hint"></p>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

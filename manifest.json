@@ -1,0 +1,68 @@
+{
+  "manifest_version": 3,
+  "name": "YT Neon para YouTube",
+  "version": "1.0.0",
+  "description": "Tema neon, fundos animados e hover 3D no YouTube, com player de vídeo flutuante sempre por cima das outras janelas.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*"
+  ],
+  "action": {
+    "default_title": "YT Neon",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    },
+    "default_popup": "popup.html"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "commands": {
+    "toggle-float": {
+      "suggested_key": {
+        "default": "Alt+Shift+Y"
+      },
+      "description": "Abrir ou fechar o player flutuante"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "bullet-fx.js",
+        "float.js",
+        "content.js"
+      ],
+      "css": [
+        "theme.css",
+        "effects.css",
+        "fonts.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "fonts/*.woff2"
+      ],
+      "matches": [
+        "https://www.youtube.com/*"
+      ]
+    }
+  ]
+}

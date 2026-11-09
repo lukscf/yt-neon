@@ -1,0 +1,125 @@
+/* YT Neon 1.0: tema neon para www.youtube.com. Liga com html.ytn-theme; cor em html[data-ytn-color].
+   Troca as variáveis de cor do próprio YouTube (--yt-spec-*), por isso cobre início, vídeo, busca,
+   menu lateral, menus e caixas de diálogo sem mexer na estrutura da página.
+   Anúncios não são escondidos nem alterados: só herdam as cores escuras como o resto da página. */
+
+html.ytn-theme{--ytn-bg:#120918;--ytn-panel:#1d0f27;--ytn-raised:#2a1837;--ytn-line:#48305a;--ytn-text:#f6ebff;--ytn-muted:#c4b4cf;--ytn-min:#775c8a;--ytn-deep:#0b050f;--ytn-accent:#bd77ff;--ytn-accent2:#ff3ec8;--ytn-glow:#bd77ff66;--ytn-soft:#bd77ff1f}
+html.ytn-theme[data-ytn-color=blue]{--ytn-bg:#090f18;--ytn-panel:#0f1827;--ytn-raised:#182337;--ytn-line:#303f5a;--ytn-text:#ebf2ff;--ytn-muted:#b4becf;--ytn-min:#5c6d8a;--ytn-deep:#05090f;--ytn-accent:#5c9dff;--ytn-accent2:#50dcff;--ytn-glow:#5c9dff66;--ytn-soft:#5c9dff1f}
+html.ytn-theme[data-ytn-color=pink]{--ytn-bg:#180911;--ytn-panel:#270f1b;--ytn-raised:#371828;--ytn-line:#5a3045;--ytn-text:#ffebf5;--ytn-muted:#cfb4c2;--ytn-min:#8a5c73;--ytn-deep:#0f050a;--ytn-accent:#ff74bb;--ytn-accent2:#ffbe78;--ytn-glow:#ff74bb66;--ytn-soft:#ff74bb1f}
+html.ytn-theme[data-ytn-color=cyan]{--ytn-bg:#091818;--ytn-panel:#0f2726;--ytn-raised:#183736;--ytn-line:#305a58;--ytn-text:#ebfffe;--ytn-muted:#b4cfce;--ytn-min:#5c8a88;--ytn-deep:#050f0f;--ytn-accent:#4fe0db;--ytn-accent2:#32a0ff;--ytn-glow:#4fe0db66;--ytn-soft:#4fe0db1f}
+html.ytn-theme[data-ytn-color=green]{--ytn-bg:#09180e;--ytn-panel:#0f2717;--ytn-raised:#183722;--ytn-line:#305a3e;--ytn-text:#ebfff1;--ytn-muted:#b4cfbd;--ytn-min:#5c8a6b;--ytn-deep:#050f09;--ytn-accent:#75df95;--ytn-accent2:#c8ff78;--ytn-glow:#75df9566;--ytn-soft:#75df951f}
+/* Tema Bullet (Bullet Identity Source v1.27): rampa ink neutra, texto branco e paper-100,
+   lime-500 só como acento (foco, progresso, ativo), nunca como fundo de área. */
+html.ytn-theme[data-ytn-color=bullet]{--ytn-bg:#070707;--ytn-panel:#0C0C0C;--ytn-raised:#1A1A1A;--ytn-line:#242424;--ytn-text:#FFFFFF;--ytn-muted:#A3A3A3;--ytn-min:#6E6E6E;--ytn-deep:#000000;--ytn-accent:#C2F141;--ytn-accent2:#C2F141;--ytn-glow:rgba(194,241,65,.18);--ytn-soft:rgba(255,255,255,.08)}
+
+/* Variáveis do YouTube. Valem para o tema claro e o escuro, e para os blocos que redeclaram [dark]. */
+html.ytn-theme,html.ytn-theme [dark],html.ytn-theme ytd-app,html.ytn-theme ytd-masthead,html.ytn-theme tp-yt-iron-dropdown,html.ytn-theme ytd-popup-container{
+  color-scheme:dark;
+  --yt-spec-base-background:var(--ytn-bg)!important;
+  --yt-spec-raised-background:var(--ytn-panel)!important;
+  --yt-spec-menu-background:var(--ytn-panel)!important;
+  --yt-spec-inverted-background:var(--ytn-text)!important;
+  --yt-spec-additive-background:var(--ytn-soft)!important;
+  --yt-spec-outline:var(--ytn-line)!important;
+  --yt-spec-10-percent-layer:var(--ytn-line)!important;
+  --yt-spec-badge-chip-background:var(--ytn-soft)!important;
+  --yt-spec-button-chip-background-hover:color-mix(in srgb,var(--ytn-accent) 22%,transparent)!important;
+  --yt-spec-touch-response:var(--ytn-accent)!important;
+  --yt-spec-text-primary:var(--ytn-text)!important;
+  --yt-spec-text-primary-inverse:var(--ytn-bg)!important;
+  --yt-spec-text-secondary:var(--ytn-muted)!important;
+  --yt-spec-text-disabled:var(--ytn-min)!important;
+  --yt-spec-call-to-action:var(--ytn-accent)!important;
+  --yt-spec-themed-blue:var(--ytn-accent)!important;
+  --yt-spec-suggested-action:color-mix(in srgb,var(--ytn-accent) 18%,transparent)!important;
+  --yt-spec-icon-active-other:var(--ytn-text)!important;
+  --yt-spec-icon-inactive:var(--ytn-muted)!important;
+  --yt-spec-icon-disabled:var(--ytn-min)!important;
+  --yt-spec-brand-background-solid:var(--ytn-bg)!important;
+  --yt-spec-brand-background-primary:color-mix(in srgb,var(--ytn-bg) 92%,transparent)!important;
+  --yt-spec-brand-background-secondary:var(--ytn-panel)!important;
+  --yt-spec-general-background-a:var(--ytn-bg)!important;
+  --yt-spec-general-background-b:var(--ytn-bg)!important;
+  --yt-spec-general-background-c:var(--ytn-panel)!important;
+  --yt-spec-mono-filled:var(--ytn-text)!important;
+  --yt-spec-mono-tonal:var(--ytn-soft)!important;
+  --yt-spec-mono-tonal-hover:color-mix(in srgb,var(--ytn-accent) 22%,transparent)!important;
+  --yt-spec-wordmark-text:var(--ytn-text)!important;
+  --yt-frosted-glass-desktop:color-mix(in srgb,var(--ytn-bg) 82%,transparent)!important;
+  --paper-tooltip-background:var(--ytn-raised)!important;
+  --ytd-searchbox-background:var(--ytn-bg)!important;
+  --ytd-searchbox-legacy-border-color:var(--ytn-line)!important;
+  --ytd-searchbox-legacy-button-color:var(--ytn-panel)!important;
+  --ytd-searchbox-legacy-button-border-color:var(--ytn-line)!important;
+  --ytd-searchbox-text-color:var(--ytn-text)!important;
+}
+html.ytn-theme,html.ytn-theme body{background:var(--ytn-bg)!important;color:var(--ytn-text)}
+html.ytn-theme ::selection{background:color-mix(in srgb,var(--ytn-accent) 45%,transparent)}
+html.ytn-theme{scrollbar-color:var(--ytn-line) var(--ytn-bg)}
+
+/* Topo: vidro escuro com uma linha de luz embaixo */
+html.ytn-theme ytd-masthead #background,html.ytn-theme #masthead-container #background{background:color-mix(in srgb,var(--ytn-bg) 86%,transparent)!important;backdrop-filter:blur(14px)}
+html.ytn-theme #masthead-container{box-shadow:0 1px 0 color-mix(in srgb,var(--ytn-accent) 30%,transparent),0 8px 24px #0006}
+html.ytn-theme ytd-searchbox #container.ytd-searchbox,html.ytn-theme .ytSearchboxComponentInputBox{background:var(--ytn-panel)!important;border-color:var(--ytn-line)!important}
+html.ytn-theme ytd-searchbox[has-focus] #container.ytd-searchbox,html.ytn-theme .ytSearchboxComponentInputBoxHasFocus{border-color:var(--ytn-accent)!important;box-shadow:0 0 0 1px var(--ytn-accent),0 0 16px var(--ytn-glow)!important}
+html.ytn-theme #search-icon-legacy,html.ytn-theme .ytSearchboxComponentSearchButton{background:var(--ytn-raised)!important;border-color:var(--ytn-line)!important}
+
+/* Menu lateral: item ativo com barra de luz */
+html.ytn-theme #guide-content,html.ytn-theme #guide-inner-content,html.ytn-theme ytd-mini-guide-renderer{background:color-mix(in srgb,var(--ytn-bg) 90%,transparent)!important}
+html.ytn-theme ytd-guide-entry-renderer[active] tp-yt-paper-item,html.ytn-theme ytd-guide-entry-renderer[active] #endpoint,html.ytn-theme ytd-mini-guide-entry-renderer[aria-selected=true]{background:linear-gradient(90deg,color-mix(in srgb,var(--ytn-accent) 30%,transparent),transparent)!important;box-shadow:inset 3px 0 0 var(--ytn-accent)}
+html.ytn-theme ytd-guide-entry-renderer[active] yt-icon,html.ytn-theme ytd-guide-entry-renderer[active] .title{color:var(--ytn-accent)!important}
+html.ytn-theme ytd-guide-section-renderer{border-color:var(--ytn-line)!important}
+
+/* Chips de filtro (início, busca e vídeo) */
+html.ytn-theme yt-chip-cloud-chip-renderer[selected] #chip-container,html.ytn-theme yt-chip-cloud-chip-renderer[selected] .ytChipShapeChip,html.ytn-theme .ytChipShapeActive{background:linear-gradient(135deg,var(--ytn-accent),var(--ytn-accent2))!important;color:var(--ytn-bg)!important;box-shadow:0 0 14px var(--ytn-glow)}
+html.ytn-theme[data-ytn-color=bullet] yt-chip-cloud-chip-renderer[selected] #chip-container,html.ytn-theme[data-ytn-color=bullet] .ytChipShapeActive{background:#F8F3E9!important;color:#070707!important;box-shadow:none}
+html.ytn-theme #chips-wrapper,html.ytn-theme ytd-feed-filter-chip-bar-renderer #chips-wrapper{background:color-mix(in srgb,var(--ytn-bg) 88%,transparent)!important}
+html.ytn-theme #left-arrow-button,html.ytn-theme #right-arrow-button,html.ytn-theme #left-arrow:after,html.ytn-theme #right-arrow:before{background:var(--ytn-bg)!important}
+
+/* Miniaturas: canto neon e brilho no hover (só nos vídeos, não nos anúncios) */
+html.ytn-theme :is(ytd-rich-item-renderer,ytd-video-renderer,ytd-compact-video-renderer,yt-lockup-view-model,ytd-grid-video-renderer,ytd-playlist-renderer):not(:has(ytd-ad-slot-renderer,ytd-in-feed-ad-layout-renderer)) :is(ytd-thumbnail,yt-thumbnail-view-model){border-radius:12px;transition:box-shadow .25s cubic-bezier(.22,1,.36,1)}
+html.ytn-theme :is(ytd-rich-item-renderer,ytd-video-renderer,ytd-compact-video-renderer,yt-lockup-view-model,ytd-grid-video-renderer,ytd-playlist-renderer):not(:has(ytd-ad-slot-renderer,ytd-in-feed-ad-layout-renderer)):hover :is(ytd-thumbnail,yt-thumbnail-view-model){box-shadow:0 0 0 1px var(--ytn-accent),0 10px 30px var(--ytn-glow)}
+html.ytn-theme #video-title:hover,html.ytn-theme a.yt-lockup-metadata-view-model__title:hover{color:var(--ytn-accent)!important}
+
+/* Botões principais (inscrever-se, salvar, compartilhar) */
+html.ytn-theme .yt-spec-button-shape-next--filled.yt-spec-button-shape-next--mono{background:linear-gradient(135deg,var(--ytn-accent),var(--ytn-accent2))!important;color:var(--ytn-bg)!important;box-shadow:0 0 14px var(--ytn-glow)}
+html.ytn-theme[data-ytn-color=bullet] .yt-spec-button-shape-next--filled.yt-spec-button-shape-next--mono{background:#F8F3E9!important;color:#070707!important;box-shadow:none}
+html.ytn-theme .yt-spec-button-shape-next--tonal.yt-spec-button-shape-next--mono{background:var(--ytn-soft)!important;border:1px solid color-mix(in srgb,var(--ytn-accent) 25%,transparent)}
+html.ytn-theme .yt-spec-button-shape-next--tonal.yt-spec-button-shape-next--mono:hover{background:color-mix(in srgb,var(--ytn-accent) 22%,transparent)!important;box-shadow:0 0 12px var(--ytn-glow)}
+html.ytn-theme .yt-spec-button-shape-next--call-to-action{color:var(--ytn-accent)!important}
+html.ytn-theme a,html.ytn-theme .yt-core-attributed-string__link--call-to-action-color{color:inherit}
+html.ytn-theme .yt-core-attributed-string__link--call-to-action-color,html.ytn-theme #description a{color:var(--ytn-accent)!important}
+
+/* Página do vídeo: descrição e comentários em cartões */
+html.ytn-theme ytd-watch-metadata #description,html.ytn-theme #description.ytd-watch-metadata{background:var(--ytn-panel)!important;border:1px solid var(--ytn-line);border-radius:12px}
+html.ytn-theme ytd-watch-metadata #description:hover{border-color:color-mix(in srgb,var(--ytn-accent) 45%,transparent);box-shadow:0 0 18px var(--ytn-glow)}
+html.ytn-theme ytd-comment-simplebox-renderer #placeholder-area,html.ytn-theme #contenteditable-root.yt-formatted-string{color:var(--ytn-muted)!important}
+html.ytn-theme ytd-comment-simplebox-renderer #underline .unfocused-line{border-color:var(--ytn-line)!important}
+html.ytn-theme ytd-comment-simplebox-renderer #underline .focused-line{border-color:var(--ytn-accent)!important}
+
+/* Player: barra de progresso e volume na cor do tema (o marcador amarelo de anúncio fica como está) */
+html.ytn-theme .ytp-play-progress,html.ytn-theme .ytp-swatch-background-color{background:linear-gradient(90deg,var(--ytn-accent2),var(--ytn-accent))!important}
+html.ytn-theme .ytp-scrubber-button,html.ytn-theme .ytp-swatch-background-color-secondary{background:var(--ytn-accent)!important;box-shadow:0 0 10px var(--ytn-accent)}
+html.ytn-theme .ytp-volume-slider-handle,html.ytn-theme .ytp-volume-slider-handle:before{background:var(--ytn-accent)!important}
+html.ytn-theme .ytp-settings-menu,html.ytn-theme .ytp-popup{background:color-mix(in srgb,var(--ytn-bg) 90%,transparent)!important;border:1px solid var(--ytn-line);box-shadow:0 12px 32px #0009}
+html.ytn-theme .ytp-menuitem[aria-checked=true] .ytp-menuitem-toggle-checkbox{background:var(--ytn-accent)!important}
+html.ytn-theme #movie_player{border-radius:0}
+html.ytn-theme ytd-watch-flexy:not([theater]):not([fullscreen]) #player-container-outer #movie_player{box-shadow:0 0 0 1px color-mix(in srgb,var(--ytn-accent) 25%,transparent),0 18px 50px var(--ytn-glow)}
+
+/* Menus, caixas de diálogo e dicas */
+html.ytn-theme tp-yt-paper-listbox,html.ytn-theme ytd-menu-popup-renderer,html.ytn-theme ytd-multi-page-menu-renderer,html.ytn-theme yt-sheet-view-model,html.ytn-theme .yt-contextual-sheet-layout-wiz,html.ytn-theme tp-yt-paper-dialog{background:var(--ytn-panel)!important;border:1px solid var(--ytn-line);box-shadow:0 12px 32px rgba(0,0,0,.55)!important}
+html.ytn-theme tp-yt-paper-item:hover,html.ytn-theme ytd-menu-service-item-renderer:hover,html.ytn-theme yt-list-item-view-model:hover{background:color-mix(in srgb,var(--ytn-accent) 16%,transparent)!important}
+html.ytn-theme tp-yt-paper-tooltip #tooltip{background:var(--ytn-raised)!important;border:1px solid var(--ytn-line);color:var(--ytn-text)!important}
+
+/* Foco visível na cor do tema */
+html.ytn-theme :focus-visible{outline:2px solid var(--ytn-accent)!important;outline-offset:2px}
+
+/* Bullet: sombras e cantos da marca, sem brilho neon */
+html.ytn-theme[data-ytn-color=bullet] *{transition-timing-function:cubic-bezier(.22,1,.36,1)}
+html.ytn-theme[data-ytn-color=bullet] #masthead-container{box-shadow:0 1px 0 #242424}
+html.ytn-theme[data-ytn-color=bullet] :is(ytd-thumbnail,yt-thumbnail-view-model){box-shadow:none}
+html.ytn-theme[data-ytn-color=bullet] :is(ytd-rich-item-renderer,ytd-video-renderer,ytd-compact-video-renderer,yt-lockup-view-model):hover :is(ytd-thumbnail,yt-thumbnail-view-model){box-shadow:0 0 0 1px #333333,0 12px 32px rgba(0,0,0,.55)}
+html.ytn-theme[data-ytn-color=bullet] ytd-guide-entry-renderer[active] tp-yt-paper-item,html.ytn-theme[data-ytn-color=bullet] ytd-guide-entry-renderer[active] #endpoint{background:#1A1A1A!important;box-shadow:inset 3px 0 0 #C2F141}
+html.ytn-theme[data-ytn-color=bullet] ytd-guide-entry-renderer[active] .title{color:#F8F3E9!important}
+html.ytn-theme[data-ytn-color=bullet] .ytp-play-progress,html.ytn-theme[data-ytn-color=bullet] .ytp-swatch-background-color{background:#C2F141!important}
+html.ytn-theme[data-ytn-color=bullet] .ytp-scrubber-button{box-shadow:none}
